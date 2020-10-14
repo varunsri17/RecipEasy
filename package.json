@@ -1,0 +1,22 @@
+{
+  "name": "recipeasy",
+  "version": "1.0.0",
+  "description": "COMP 426 Final Project – RecipEasy Tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/varunsri17/RecipEasy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/varunsri17/RecipEasy/issues"
+  },
+  "homepage": "https://github.com/varunsri17/RecipEasy#readme",
+  "dependencies": {
+    "bulma": "^0.9.1"
+  }
+}
