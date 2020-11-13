@@ -1,22 +1,27 @@
 export async function renderhome() {
     const root = $('#root');
 
-    /*const users = await axios({
+    const users = await axios({
         method: 'get',
         url: 'http://localhost:3000/user',
         withCredentials: true,
     })
+    console.log(users.data);
     $('#feed').empty();
-    for (let i = 0; i < 50; i++) {
-        let user = users.data[i];
-        $('#feed').append(createRecipeView(user));
-    }*/
-    const user = {id: 10, firstName: "alex", lastName: "dude", diet: "false"};
-    $('#recipefeed').append(createRecipeView({user}));
-
+    for (let i = 0; i < users.data.length; i++) {
+        console.log(users.data[i]);
+        const user = await axios({
+            method: 'get',
+            url: `http://localhost:3000/user/${users.data[i]}`,
+            withCredentials: true,
+        })
+        console.log(user);
+        $('#recipefeed').append(createRecipeView(user.data));
+    }
 }
 
 export function createRecipeView(user) {
+    console.log(user);
     let recipeview = `<div class="card m-3" id ="${user.id}">
         <div class="card-content">
             <div class="media">

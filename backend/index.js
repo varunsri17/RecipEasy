@@ -8,6 +8,16 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
+//apparently this is very unsafe and we need a better way to this
+var cors = require('cors');    
+app.use(cors({
+    origin: function(origin, callback){
+      return callback(null, true);
+    },
+    optionsSuccessStatus: 200,
+    credentials: true
+  }));
+
 const spoonApiKey = process.env.SPOON_API_KEY
 
 // DOCUMENTATION URL https://spoonacular.com/food-api/docs#Search-Recipes-Complex
