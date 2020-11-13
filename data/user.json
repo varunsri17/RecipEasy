@@ -1,0 +1,24 @@
+{
+  "0": {
+    "id": 0,
+    "firstName": "Emily",
+    "lastName": "Junior",
+    "favorites": [
+      1,
+      2
+    ],
+    "diet": 0
+  },
+  "1": {
+    "id": 1,
+    "firstName": "Jared",
+    "lastName": "White",
+    "favorites": [
+      0,
+      1,
+      2
+    ],
+    "diet": "ten",
+    "lastname": "White"
+  }
+}
