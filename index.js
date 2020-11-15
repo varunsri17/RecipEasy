@@ -10,13 +10,13 @@ app.use(bodyParser.json());
 
 //apparently this is very unsafe and we need a better way to this
 const cors = require('cors');    
-/*app.use(cors({
+app.use(cors({
     origin: function(origin, callback){
       return callback(null, true);
     },
     optionsSuccessStatus: 200,
     credentials: true
-  }));*/
+  }));
 
 const spoonApiKey = process.env.SPOON_API_KEY
 
@@ -35,13 +35,13 @@ const getRecipeInfoURL = 'https://api.spoonacular.com/recipes/{id}/information'
 const autoCompleteURL = 'https://api.spoonacular.com/recipes/autocomplete'
 
 // get all user
-app.get('/user', cors(), async(req, res, next) => {
+app.get('/api/user', async(req, res, next) => {
     res.json(user.getAllIDs());
 
 });
 
 // get user by id
-app.get('/user/:id', (req,res) => {
+app.get('/api/user/:id', (req,res) => {
     let u = user.findByID(req.params.id);
     if (u == null) {
         res.status(404).send("User not found");
@@ -51,7 +51,7 @@ app.get('/user/:id', (req,res) => {
 });
 
 // create user information
-app.post('/user', (req, res) => {
+app.post('/api/user', cors(), (req, res) => {
     let {firstName, lastName, favorites, diet} = req.body;
     let u = user.create(firstName, lastName, favorites, diet);
     if (u == null) {
@@ -61,7 +61,7 @@ app.post('/user', (req, res) => {
 });
 
 // update user information
-app.put('/user/:id', (req, res) => {
+app.put('/api/user/:id', cors(), (req, res) => {
     let u = user.findByID(req.params.id);
     if (u == null) {
         res.status(404).send("User not found");
@@ -77,7 +77,7 @@ app.put('/user/:id', (req, res) => {
 });
 
 // delete user information
-app.delete('/user/:id', (req, res) => {
+app.delete('/api/user/:id', cors(), (req, res) => {
     let u = user.findByID(req.params.id);
     if (u == null) {
         res.status(404).send("User not found");
@@ -87,12 +87,21 @@ app.delete('/user/:id', (req, res) => {
     res.json(true);
 });
 
-const port = process.env.PORT ||  5000;
+const port = process.env.PORT ||  3000;
 
 // Listening on the port
 app.listen(port, () => {
     console.log('Server listening on port:' + port );
 });
+
+const path = require('path')
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 //To try PostMan Request:
 /*
