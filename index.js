@@ -9,14 +9,14 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 //apparently this is very unsafe and we need a better way to this
-var cors = require('cors');    
-app.use(cors({
+const cors = require('cors');    
+/*app.use(cors({
     origin: function(origin, callback){
       return callback(null, true);
     },
     optionsSuccessStatus: 200,
     credentials: true
-  }));
+  }));*/
 
 const spoonApiKey = process.env.SPOON_API_KEY
 
@@ -35,7 +35,7 @@ const getRecipeInfoURL = 'https://api.spoonacular.com/recipes/{id}/information'
 const autoCompleteURL = 'https://api.spoonacular.com/recipes/autocomplete'
 
 // get all user
-app.get('/user', (req, res) => {
+app.get('/user', cors(), async(req, res, next) => {
     res.json(user.getAllIDs());
 
 });
@@ -87,7 +87,7 @@ app.delete('/user/:id', (req, res) => {
     res.json(true);
 });
 
-const port = process.env.PORT ||  3000;
+const port = process.env.PORT ||  5000;
 
 // Listening on the port
 app.listen(port, () => {
