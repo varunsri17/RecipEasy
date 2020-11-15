@@ -7,7 +7,7 @@ const user = require('./user.js')
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
-
+//hello
 //apparently this is very unsafe and we need a better way to this
 const cors = require('cors');    
 app.use(cors({
