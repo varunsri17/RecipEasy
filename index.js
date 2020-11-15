@@ -35,13 +35,13 @@ const getRecipeInfoURL = 'https://api.spoonacular.com/recipes/{id}/information'
 const autoCompleteURL = 'https://api.spoonacular.com/recipes/autocomplete'
 
 // get all user
-app.get('/api/user', async(req, res, next) => {
+app.get('/user', async(req, res, next) => {
     res.json(user.getAllIDs());
 
 });
 
 // get user by id
-app.get('/api/user/:id', (req,res) => {
+app.get('/user/:id', (req,res) => {
     let u = user.findByID(req.params.id);
     if (u == null) {
         res.status(404).send("User not found");
@@ -51,7 +51,7 @@ app.get('/api/user/:id', (req,res) => {
 });
 
 // create user information
-app.post('/api/user', cors(), (req, res) => {
+app.post('/user', cors(), (req, res) => {
     let {firstName, lastName, favorites, diet} = req.body;
     let u = user.create(firstName, lastName, favorites, diet);
     if (u == null) {
@@ -61,7 +61,7 @@ app.post('/api/user', cors(), (req, res) => {
 });
 
 // update user information
-app.put('/api/user/:id', cors(), (req, res) => {
+app.put('/user/:id', cors(), (req, res) => {
     let u = user.findByID(req.params.id);
     if (u == null) {
         res.status(404).send("User not found");
@@ -77,7 +77,7 @@ app.put('/api/user/:id', cors(), (req, res) => {
 });
 
 // delete user information
-app.delete('/api/user/:id', cors(), (req, res) => {
+app.delete('/user/:id', cors(), (req, res) => {
     let u = user.findByID(req.params.id);
     if (u == null) {
         res.status(404).send("User not found");
