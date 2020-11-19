@@ -1,6 +1,7 @@
 {
   "0": {
     "id": 0,
+    "username": "emily1",
     "firstName": "Emily",
     "lastName": "Junior",
     "favorites": [
@@ -11,14 +12,13 @@
   },
   "1": {
     "id": 1,
-    "firstName": "Jared",
-    "lastName": "White",
+    "username": "hisham97",
+    "firstName": "Hisham",
+    "lastName": "Masood",
     "favorites": [
-      0,
-      1,
-      2
+      5,
+      7
     ],
-    "diet": "ten",
-    "lastname": "White"
+    "diet": 3
   }
 }
