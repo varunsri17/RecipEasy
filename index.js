@@ -54,19 +54,20 @@ const login_info = require('data-store')({ path: process.cwd() + '/data/users.js
 //LOGIN CALLS
 app.post('/login', (req,res) => {
 
-    let user = req.body.user;
+    let username = req.body.username;
     let password = req.body.password;
 
-    let user_info = login_info.get(user);
+    //let user_info = login_info.get(username);
+    let user_info = user.findByUsername(username);
     if (user_info == null) {
         res.status(404).send("Not found")
         return;
     }
 
     if (user_info.password == password) {
-        console.log("VALID CREDENTIALS" + ' ' + user)
-        req.session.user = user;
-        res.json(true);
+        console.log("VALID CREDENTIALS" + ' ' + username);
+        req.session.username = username;
+        res.json(user_info);
         return;
     }
     res.status(403).send("UNAUTHORIZED USER THIS IS THE FBI")
@@ -103,32 +104,53 @@ app.get('/usernames/:username', async(req, res, next) => {
 // get all user
 // This wont require authentication so we can get all infos sent without password
 // or we can add authentication and then use our cookie to get in
-app.get('/user', async(req, res, next) => {
-    res.json(user.getAllIDs());
+// app.get('/user', async(req, res, next) => {
+//     res.json(user.getAllIDs());
 
-});
-// get user data by id
-app.get('/user/:id', (req,res) => {
-    if(req.session.user == undefined) {
-        res.status(403).send("Unauthorized");
+// });
+// get user data by username
+app.get('/user/:username', (req,res) => {
+    console.log(req.session.username);
+    if(req.session.username == undefined) {
+        res.status(403).send(" FIRST Unauthorized");
         return;
     }
-    let u = user.findByID(req.params.id);
+    let u = user.findByUsername(req.params.username);
     if (u == null) {
-        res.status(404).send("User not found using user.findbyId");
+        res.status(404).send("User not found using Username");
         return;
     }
-    if(u.username!= req.session.user) {
-        res.status(403).send("Unauthorized")
+    console.log(u);
+    console.log(u.username);
+    if(u.username!= req.session.username) {
+        res.status(403).send(" LAST Unauthorized")
         return;
     }
     res.json(u);
 });
 
+// //get the users favorites
+// app.get('/user/:id/favorites', (req,res) => {
+//     if(req.session.user == undefined) {
+//         res.status(403).send("Unauthorized");
+//         return;
+//     }
+//     let u = user.findByID(req.params.id);
+//     if (u == null) {
+//         res.status(404).send("User not found using user.findbyId");
+//         return;
+//     }
+//     if(u.username!= req.session.user) {
+//         res.status(403).send("Unauthorized")
+//         return;
+//     }
+//     res.json(u);
+// });
+
 // create user information
 app.post('/user', cors(), (req, res) => {
-    let {firstName, lastName, favorites, diet } = req.body;
-    let u = user.create(username,firstName, lastName, favorites, diet);
+    let {username, password, firstname, lastname, favorites } = req.body;
+    let u = user.create(username, password, firstname, lastname, favorites);
     if (u == null) {
         res.status(404).send("Bad Request");
     }
@@ -136,41 +158,46 @@ app.post('/user', cors(), (req, res) => {
 });
 
 // update user information
-app.put('/user/:id', cors(), (req, res) => {
-    if(req.session.user == undefined) {
+app.put('/user/:username', cors(), (req, res) => {
+    if(req.session.username == undefined) {
+        console.log(req.session.username)
         res.status(403).send("Unauthorized");
         return;
     }
-    let u = user.findByID(req.params.id);
+    let u = user.findByUsername(req.params.username);
     if (u == null) {
-        res.status(404).send("User not found using user.findbyId");
+        res.status(404).send("User not found using user.find");
         return;
     }
-    if(u.username!= req.session.user) {
+    if(u.username!= req.session.username) {
         res.status(403).send("Unauthorized")
         return;
     }
-    let {firstName, lastName, favorites, diet,} = req.body;
-    u.firstName = firstName;
-    u.lastName = lastName;
+    let favorites = req.body.favorites;
+    console.log(favorites);
+    console.log(u);
     u.favorites = favorites;
-    u.diet = diet;
+    console.log(u);
     u.update();
     res.json(u);
+    console.log("successful update of user info!")
 });
 
 // delete user information
-app.delete('/user/:id', cors(), (req, res) => {
-    if (req.session.user == undefined) {
+app.delete('/user/:username', cors(), (req, res) => {
+    if (req.session.username == undefined) {
         res.status(403).send("Unauthorized");
         return;
     }
-    let u = user.findByID(req.params.id);
+    let u = user.findByUsername(req.params.username);
+    console.log("We are trying to figure out whats wrong with you");
+    console.log(u);
+    console.log("where is the user data");
     if (u == null) {
         res.status(404).send("User not found");
         return;
     }
-    if(u.username!= req.session.user) {
+    if(u.username!= req.session.username) {
         res.status(403).send("Unauthorized")
         return;
     }

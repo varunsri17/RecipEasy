@@ -1,13 +1,12 @@
 {
-    "emily1": {
-      "firstName": "Emily",
-      "lastName": "Junior",
-      "password": "junior1"
-    },
-
-    "hisham97": {
-        "firstName": "Hisham",
-        "lastName": "Masood",
-        "password": "Masood1"
-      }
+  "hisham97": {
+    "username": "hisham97",
+    "firstName": "Hisham",
+    "lastName": "Masood",
+    "password": "Masood1",
+    "favorites": [
+      5,
+      7
+    ]
+  }
 }
