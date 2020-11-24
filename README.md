@@ -18,42 +18,42 @@ FrontEnd Link: https://recipeazy426.herokuapp.com/index.html
 
 # API Documentation
 
-Login with Username and Password
-Method: Post
-Endpoint: https://recipeasy426.herokuapp.com/login
-Request Body: {username, password}
+Login with Username and Password\
+Method: Post\
+Endpoint: https://recipeasy426.herokuapp.com/login \
+Request Body: {username, password}\
 JSON Response: {username, password, firstname, lastname, favorites}
 
 Logout\
 Method: Get\
-Endpoint: https://recipeasy426.herokuapp.com/logout\
+Endpoint: https://recipeasy426.herokuapp.com/logout
 
 Get All Usernames\
 Method: Get\
-Endpoint: https://recipeasy426.herokuapp.com/usernames\
-JSON Response: array of all usernames\
+Endpoint: https://recipeasy426.herokuapp.com/usernames \
+JSON Response: array of all usernames
 
 Get User Information\
 Method: Get\
-Endpoint: https://recipeasy426.herokuapp.com/usernames/:username\
+Endpoint: https://recipeasy426.herokuapp.com/usernames/:username \
 Path Parameter: username\
-JSON Response: {username, password, firstname, lastname, favorites}\
+JSON Response: {username, password, firstname, lastname, favorites}
 
 Create User\
 Method: Post\
-Endpoint: https://recipeasy426.herokuapp.com/user\
-Request Body: {username, password, firstname, lastname, favorites}\
+Endpoint: https://recipeasy426.herokuapp.com/user \
+Request Body: {username, password, firstname, lastname, favorites}
 
 Update User Information\
 Method: Put\
-Endpoint: https://recipeasy426.herokuapp.com/user/:username\
+Endpoint: https://recipeasy426.herokuapp.com/user/:username \
 Path Parameter: username\
-Request Body: {username, password, firstname, lastname, favorites}\
+Request Body: {username, password, firstname, lastname, favorites}
 
 Delete User\
 Method: Delete\
-Endpoint: https://recipeasy426.herokuapp.com/user/:username\
-Path Parameter: username\
+Endpoint: https://recipeasy426.herokuapp.com/user/:username \
+Path Parameter: username
 
 # Description Of Our Web App
 
