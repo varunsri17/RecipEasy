@@ -3,8 +3,6 @@ Authors: Nuran Golbasi, Hisham Masood, Prasiddhi Jain, Varun Srivastava
 
 COMP 426 Final Project – RecipEasy Tool
 
-https://recipeazy426.herokuapp.com/index.html
-
 This GitHub contains the code for the BackEnd of the RecipEasy tool.
 
 User Object using data-store to create and store information about user.
@@ -13,6 +11,52 @@ Array used to track favorites.
 Express used to connect front end and back end. Host of API calls used.
 
 Languages: JavaScript and HTML
+Tools and Frameworks: Node.js, Express.js
+
+The github repository for our frontend is as following: https://github.com/Hmasood97/RecipEasyFrontEnd/new/master
+FrontEnd Link: https://recipeazy426.herokuapp.com/index.html
+
+# API Documentation
+
+Login with Username and Password
+Method: Post
+Endpoint: https://recipeasy426.herokuapp.com/login
+Request Body: {username, password}
+JSON Response: {username, password, firstname, lastname, favorites}
+
+Logout
+Method: Get
+Endpoint: https://recipeasy426.herokuapp.com/logout
+
+Get All Usernames
+Method: Get
+Endpoint: https://recipeasy426.herokuapp.com/usernames
+JSON Response: array of all usernames
+
+Get User Information
+Method: Get
+Endpoint: https://recipeasy426.herokuapp.com/usernames/:username
+Path Parameter: username
+JSON Response: {username, password, firstname, lastname, favorites}
+
+Create User
+Method: Post
+Endpoint: https://recipeasy426.herokuapp.com/user
+Request Body: {username, password, firstname, lastname, favorites}
+
+Update User Information
+Method: Put
+Endpoint: https://recipeasy426.herokuapp.com/user/:username
+Path Parameter: username
+Request Body: {username, password, firstname, lastname, favorites}
+
+Delete User
+Method: Delete
+Endpoint: https://recipeasy426.herokuapp.com/user/:username
+Path Parameter: username
+
+
+# Description Of Our Web App
 
 What is RecipEasy?
 Well, imagine this scenario: it’s been a busy week, and you haven’t had much time to meal prep or go grocery shopping. 
